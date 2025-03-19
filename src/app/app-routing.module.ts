@@ -5,8 +5,16 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ScheduleComponent } from './pages/schedule/schedule.component';
+import { LeaderboardComponent } from './pages/leaderboard/leaderboard.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', redirectTo: '/schedule', pathMatch: 'full' },
+  { path: 'schedule', component: ScheduleComponent },
+  { path: 'leaderboard', component: LeaderboardComponent },
+  { path: '**', component: NotFoundComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

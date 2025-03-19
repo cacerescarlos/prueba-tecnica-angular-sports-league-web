@@ -1,0 +1,23 @@
+<table>
+    <thead>
+        <tr>
+            <th>Team</th>
+            <th>MP</th>
+            <th>GF</th>
+            <th>GA</th>
+            <th>Points</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let team of leaderboard">
+            <td>
+                <img [src]="'assets/flags/' + team.teamName + '.png'" alt="{{ team.teamName }}">
+                {{ team.teamName }}
+            </td>
+            <td>{{ team.matchesPlayed }}</td>
+            <td>{{ team.goalsFor }}</td>
+            <td>{{ team.goalsAgainst }}</td>
+            <td>{{ team.points }}</td>
+        </tr>
+    </tbody>
+</table>

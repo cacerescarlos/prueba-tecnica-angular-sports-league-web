@@ -8,14 +8,39 @@
  */
 
 import { Injectable } from '@angular/core'
+import { Match } from '../models/match.model';
+import { LeaderboardEntry } from '../models/leaderboard.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map, Observable, switchMap, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class LeagueService {
+  private apiUrl = 'http://localhost:3001/api/v1';
+  private accessToken: string | null = null;
+  matchesData: Match[] = [];
 
-  constructor () {}
+  constructor(private http: HttpClient) { }
+
+  private getHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.accessToken}`,
+    });
+  }
+
+  /**
+ * Obtiene el token de acceso desde la API y lo almacena en `accessToken`
+ */
+  getAccessToken(): Observable<{ success: boolean; access_token: string }> {
+    return this.http.get<{ success: boolean; access_token: string }>(`${this.apiUrl}/getAccessToken`).pipe(
+      tap(response => {
+        this.accessToken = response.access_token;
+      })
+    );
+  }
 
   /**
    * Sets the match schedule.
@@ -44,14 +69,29 @@ export class LeagueService {
    * @param {Array} matches List of matches.
    */
 
-  setMatches (matches: any[]) {}
+  setMatches(matches: Match[]) {
+    this.matchesData = matches;
+  }
 
   /**
    * Returns the full list of matches.
    *
    * @returns {Array} List of matches.
    */
-  getMatches () {}
+  getAllMatches(): Observable<Match[]> {
+    if (!this.accessToken) {
+      return this.getAccessToken().pipe(
+        switchMap(() =>
+          this.http.get<{ success: boolean; matches: Match[] }>(`${this.apiUrl}/getAllMatches`, { headers: this.getHeaders() })
+        ),
+        map(response => response.matches) // 🔹 Extrae solo el array de partidos
+      );
+    }
+
+    return this.http.get<{ success: boolean; matches: Match[] }>(`${this.apiUrl}/getAllMatches`, { headers: this.getHeaders() })
+      .pipe(map(response => response.matches)); // 🔹 Extrae solo el array de partidos
+  }
+
 
   /**
    * Returns the leaderBoard in a form of a list of JSON objecs.
@@ -68,13 +108,54 @@ export class LeagueService {
    *
    * @returns {Array} List of teams representing the leaderBoard.
    */
-   getLeaderBoard () {}
+  getLeaderBoard(): LeaderboardEntry[] {
+    const standings: { [team: string]: LeaderboardEntry } = {};
+
+    this.matchesData.forEach(match => {
+      const { homeTeam, awayTeam, homeTeamScore, awayTeamScore, matchPlayed } = match;
+
+      if (!standings[homeTeam]) standings[homeTeam] = { teamName: homeTeam, matchesPlayed: 0, goalsFor: 0, goalsAgainst: 0, points: 0 };
+      if (!standings[awayTeam]) standings[awayTeam] = { teamName: awayTeam, matchesPlayed: 0, goalsFor: 0, goalsAgainst: 0, points: 0 };
+
+      if (matchPlayed) {
+        standings[homeTeam].matchesPlayed++;
+        standings[awayTeam].matchesPlayed++;
+
+        standings[homeTeam].goalsFor += homeTeamScore;
+        standings[homeTeam].goalsAgainst += awayTeamScore;
+
+        standings[awayTeam].goalsFor += awayTeamScore;
+        standings[awayTeam].goalsAgainst += homeTeamScore;
+
+        if (homeTeamScore > awayTeamScore) {
+          standings[homeTeam].points += 3;
+        } else if (homeTeamScore < awayTeamScore) {
+          standings[awayTeam].points += 3;
+        } else {
+          standings[homeTeam].points += 1;
+          standings[awayTeam].points += 1;
+        }
+      }
+    });
+
+    return Object.keys(standings).map(team => standings[team]).sort((a, b) =>
+      b.points - a.points ||
+      (b.goalsFor - b.goalsAgainst) - (a.goalsFor - a.goalsAgainst) ||
+      b.goalsFor - a.goalsFor ||
+      a.teamName.localeCompare(b.teamName)
+    );
+  }
 
   /**
    * Asynchronic function to fetch the data from the server and set the matches.
    */
-  async fetchData () {
-    const matches = [] //TODO: replace this with the correct matches.
-    this.setMatches(matches); 
+  async fetchData() {
+    try {
+      const response = await fetch('http://localhost:3001/api/matches');
+      const matches: Match[] = await response.json();
+      this.setMatches(matches);
+    } catch (error) {
+      console.error('Error fetching matches:', error);
+    }
   }
 }

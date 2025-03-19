@@ -1,0 +1,35 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "Open Sans", sans-serif;
+  
+    th, td {
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid #E4EDF2;
+    }
+  
+    th {
+      background-color: #025FEB;
+      color: #FFFFFF;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    table {
+      font-size: 14px;
+    }
+    th, td {
+      padding: 5px;
+    }
+  }
+  
+  @media (max-width: 500px) {
+    table {
+      font-size: 12px;
+    }
+    th, td {
+      padding: 3px;
+    }
+  }
+  

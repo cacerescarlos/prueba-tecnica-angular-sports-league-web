@@ -1,0 +1,26 @@
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Stadium</th>
+            <th>Home Team</th>
+            <th>Score</th>
+            <th>Away Team</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let match of matches">
+            <td>{{ match.matchDate | date:'dd.MM.yyyy HH:mm' }}</td>
+            <td>{{ match.stadium }}</td>
+            <td>                
+                <img [src]="'https://flagsapi.codeaid.io/' + match.homeTeam + '.png'" alt="{{ match.homeTeam }}">
+                {{ match.homeTeam }}
+            </td>
+            <td>{{ match.matchPlayed ? (match.homeTeamScore + ' : ' + match.awayTeamScore) : '-' }}</td>
+            <td>
+                <img [src]="'https://flagsapi.codeaid.io/' + match.awayTeam + '.png'" alt="{{ match.awayTeam }}">
+                {{ match.awayTeam }}
+            </td>
+        </tr>
+    </tbody>
+</table>
