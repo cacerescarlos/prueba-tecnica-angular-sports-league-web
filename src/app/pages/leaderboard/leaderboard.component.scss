@@ -1,77 +1,63 @@
 @import '/src/assets/variables';
-.schedule-container {
+
+.leaderboard-container {
   h2 {
-    margin-bottom: 20px;
+    margin: 0;
+    padding: 20px 0;
     text-align: center;
     font-size: 24px;
-    color: #364d6f;
+    color: $title;
     font-weight: bold;
   }
 }
-
-
 
 table {
   width: 100%;
   border-collapse: collapse;
   background-color: white;
 
-  thead {
-    tr {
-      height: 40px;
-    }
+  thead tr {
+    height: 40px;
   }
 
-  tr {
+  tbody tr {
     height: 70px;
   }
 
-  .team-container {
-    padding: 0px 15px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  tbody tr:nth-child(even) {
+    border-top: 1px solid #E4EDF2;
+    border-bottom: 1px solid #E4EDF2;
   }
 
-  .lf {
-    justify-content: left;
+  tbody td {
+    font-size: 14px;
+
+    img {
+      width: 53px !important;
+      height: 37px !important;
+      object-fit: cover;
+    }
   }
 
-  .ri {
-    justify-content: right;
+  th {
+    background-color: #e3edf3;
+    color: $title;
+    font-size: 14px;
   }
 
+  tbody tr .points-column {
+    font-weight: 800;
+    color: $primary;
+  }
 }
 
-
-th {
-  background-color: #e3edf3;
-  color: $title;
-  font-size: 14px;
-}
-
-td {
-  font-size: 14px;
-}
-
-td img {
-  width: 53px;
-  height: 37px;
-  object-fit: cover;
-}
-
-tr:nth-child(even) {
-  background-color: $table-even-row;
-}
-
-.position-column {
-  width: 5%;
-}
 
 .team-column {
-  width: 60%;
+  width: 50%;
   padding: 0px 15px;
 }
+
+
 
 .mp-column,
 .gf-column,
@@ -79,8 +65,60 @@ tr:nth-child(even) {
 .gd-column,
 .points-column {
   width: 10%;
+  text-align: center;
+  display: table-cell;
 }
 
-.points-column {
-  font-weight: bold;
+.points-column{
+  padding-right: 10px;
+}
+
+
+/* Desktop: Mostrar todas las 5 columnas */
+@media (min-width: 1000px) {
+
+  .mp-column,
+  .gf-column,
+  .ga-column,
+  .gd-column,
+  .points-column {
+    display: table-cell;
+  }
+
+  .gd-column {
+    display: none;
+  }
+
+}
+
+/* Tablet: Ocultar la columna de fecha */
+@media (max-width: 999px) and (min-width: 750px) {
+
+  .mp-column,
+  .gf-column,
+  .ga-column,
+  .gd-column,
+  .points-column {
+    display: table-cell;
+  }
+
+  .gd-column {
+    display: none;
+  }
+
+}
+
+/* Móvil: Ocultar la columna de fecha y estadio */
+@media (max-width: 749px) {
+
+  .gf-column,
+  .ga-column {
+    display: none;
+  }
+
+  .gd-column {
+    display: table-cell;
+  }
+
+
 }

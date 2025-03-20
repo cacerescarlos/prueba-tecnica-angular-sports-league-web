@@ -23,7 +23,9 @@ export class LeagueService {
   private accessToken: string | null = null;
   matchesData: Match[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.getAccessToken();
+  }
 
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({

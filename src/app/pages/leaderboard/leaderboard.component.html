@@ -1,4 +1,4 @@
-<div class="schedule-container">
+<div class="leaderboard-container">
     <h2>League Standings</h2>
     <table>
         <thead>
@@ -7,21 +7,23 @@
                 <th class="mp-column">MP</th>
                 <th class="gf-column">GF</th>
                 <th class="ga-column">GA</th>
+                <th class="gd-column">GD</th>
                 <th class="points-column">Points</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let team of leaderboard; let i = index">
-                <td >
+                <td align="left" class="team-column">
                     <div class="team-container">
                         <img [src]="'https://flagsapi.codeaid.io/' + team.teamName + '.png'" alt="{{ team.teamName }}">
                         <strong>{{ team.teamName }}</strong>
                     </div>
                 </td>
-                <td align="center">{{ team.matchesPlayed }}</td>
-                <td align="center">{{ team.goalsFor }}</td>
-                <td align="center">{{ team.goalsAgainst }}</td>
-                <td align="center" class="points-column">{{ team.points }}</td>
+                <td class="mp-column">{{ team.matchesPlayed }}</td>
+                <td class="gf-column">{{ team.goalsFor }}</td>
+                <td class="ga-column">{{ team.goalsAgainst }}</td>
+                <td class="gd-column">{{ team.goalsFor - team.goalsAgainst }}</td>
+                <td class="points-column">{{ team.points }}</td>
             </tr>
         </tbody>
     </table>

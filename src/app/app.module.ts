@@ -15,6 +15,7 @@ import { ScheduleComponent } from './pages/schedule/schedule.component';
 import { LeaderboardComponent } from './pages/leaderboard/leaderboard.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     LeaderboardComponent,
     HeaderComponent,
     NotFoundComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
