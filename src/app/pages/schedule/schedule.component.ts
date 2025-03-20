@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Match } from 'src/app/models/match.model';
-import { LeagueService } from 'src/app/services/league.service';
+import { Match } from '../../../../src/app/models/match.model';
+import { LeagueService } from '../../../../src/app/services/league.service';
 
 @Component({
   selector: 'app-schedule',

@@ -12,7 +12,7 @@ import { Match } from '../models/match.model';
 import { LeaderboardEntry } from '../models/leaderboard.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable, switchMap, tap } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -111,10 +111,10 @@ export class LeagueService {
    *
    * @returns {Array} List of teams representing the leaderBoard.
    */
-  getLeaderBoard(matchs: any): LeaderboardEntry[] {
+  getLeaderBoard(): LeaderboardEntry[] {
     const standings: { [team: string]: LeaderboardEntry } = {};
 
-    matchs.forEach(match => {
+    this.matchesData.forEach(match => {
       const { homeTeam, awayTeam, homeTeamScore, awayTeamScore, matchPlayed } = match;
 
       if (!standings[homeTeam]) standings[homeTeam] = { teamName: homeTeam, matchesPlayed: 0, goalsFor: 0, goalsAgainst: 0, points: 0 };

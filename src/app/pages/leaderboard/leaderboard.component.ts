@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LeaderboardEntry } from 'src/app/models/leaderboard.model';
-import { LeagueService } from 'src/app/services/league.service';
+import { LeaderboardEntry } from '../../../../src/app/models/leaderboard.model';
+import { LeagueService } from '../../../../src/app/services/league.service';
 
 @Component({
   selector: 'app-leaderboard',
@@ -15,7 +15,8 @@ export class LeaderboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.leagueService.getMatches().subscribe((match) => {
-      this.leaderboard = this.leagueService.getLeaderBoard(match);
+      this.leagueService.setMatches(match);
+      this.leaderboard = this.leagueService.getLeaderBoard();
     });
   }
 }
