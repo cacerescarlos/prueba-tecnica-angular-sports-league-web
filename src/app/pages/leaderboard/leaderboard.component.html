@@ -1,23 +1,28 @@
-<table>
-    <thead>
-        <tr>
-            <th>Team</th>
-            <th>MP</th>
-            <th>GF</th>
-            <th>GA</th>
-            <th>Points</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let team of leaderboard">
-            <td>
-                <img [src]="'assets/flags/' + team.teamName + '.png'" alt="{{ team.teamName }}">
-                {{ team.teamName }}
-            </td>
-            <td>{{ team.matchesPlayed }}</td>
-            <td>{{ team.goalsFor }}</td>
-            <td>{{ team.goalsAgainst }}</td>
-            <td>{{ team.points }}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="schedule-container">
+    <h2>League Standings</h2>
+    <table>
+        <thead>
+            <tr>
+                <th align="left" class="team-column">Team Name</th>
+                <th class="mp-column">MP</th>
+                <th class="gf-column">GF</th>
+                <th class="ga-column">GA</th>
+                <th class="points-column">Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let team of leaderboard; let i = index">
+                <td >
+                    <div class="team-container">
+                        <img [src]="'https://flagsapi.codeaid.io/' + team.teamName + '.png'" alt="{{ team.teamName }}">
+                        <strong>{{ team.teamName }}</strong>
+                    </div>
+                </td>
+                <td align="center">{{ team.matchesPlayed }}</td>
+                <td align="center">{{ team.goalsFor }}</td>
+                <td align="center">{{ team.goalsAgainst }}</td>
+                <td align="center" class="points-column">{{ team.points }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

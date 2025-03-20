@@ -3,4 +3,19 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: "Open Sans", sans-serif;
+}
+
+.team-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.left {
+  justify-content: left;
+}
+
+.right {
+  justify-content: right;
 }

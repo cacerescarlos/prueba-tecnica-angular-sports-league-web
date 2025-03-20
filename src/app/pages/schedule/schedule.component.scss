@@ -1,35 +1,94 @@
+@import '/src/assets/variables';
+
+.schedule-container {
+  h2 {
+    margin: 0;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 24px;
+    color: $title;
+    font-weight: bold;
+  }
+}
+
 table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: "Open Sans", sans-serif;
-  
-    th, td {
-      padding: 10px;
-      text-align: center;
-      border-bottom: 1px solid #E4EDF2;
-    }
-  
-    th {
-      background-color: #025FEB;
-      color: #FFFFFF;
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+
+  thead tr {
+    height: 40px;
+  }
+
+  tbody tr {
+    height: 70px;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: $table-even-row;
+  }
+
+  tbody td {
+    font-size: 14px;
+
+    img {
+      width: 53px !important;
+      height: 37px !important;
+      object-fit: cover;
     }
   }
-  
-  @media (max-width: 768px) {
-    table {
-      font-size: 14px;
-    }
-    th, td {
-      padding: 5px;
-    }
+
+  th {
+    background-color: #e3edf3;
+    color: $title;
+    font-size: 14px;
   }
-  
-  @media (max-width: 500px) {
-    table {
-      font-size: 12px;
-    }
-    th, td {
-      padding: 3px;
-    }
+
+}
+
+.date-column {
+  width: 10%;
+}
+
+.stadium-column {
+  padding-left: 60px;
+}
+
+.team-column {
+  width: 25%;
+}
+
+.score-column {
+  width: 10%;
+  font-weight: bold;
+}
+
+
+
+/* Desktop: Mostrar todas las 5 columnas */
+@media (min-width: 1000px) {
+
+  .date-column,
+  .stadium-column,
+  .home-team-column,
+  .score-column,
+  .away-team-column {
+    display: table-cell;
   }
-  
+}
+
+/* Tablet: Ocultar la columna de fecha */
+@media (max-width: 999px) and (min-width: 750px) {
+  .stadium-column {
+    display: none;
+  }
+}
+
+/* Móvil: Ocultar la columna de fecha y estadio */
+@media (max-width: 749px) {
+
+  .stadium-column,
+  .date-column {
+    display: none;
+  }
+}

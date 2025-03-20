@@ -7,7 +7,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ScheduleComponent } from './pages/schedule/schedule.component';
 import { LeaderboardComponent } from './pages/leaderboard/leaderboard.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/schedule', pathMatch: 'full' },

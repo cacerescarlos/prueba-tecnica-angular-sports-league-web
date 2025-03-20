@@ -13,7 +13,7 @@ export class ScheduleComponent implements OnInit {
   constructor(private leagueService: LeagueService) { }
 
   ngOnInit(): void {
-    this.leagueService.getAllMatches().subscribe((data) => {
+    this.leagueService.getMatches().subscribe((data) => {
       this.matches = data;
     });
   }

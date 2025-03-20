@@ -1,16 +1,47 @@
-nav a {
+@import '/src/assets/variables';
+
+.header {
+  background-color: $primary;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 40px;
+  height: 60px !important;
+
+  .logo {
+    margin: 0;
+
+    img {
+      width: 110px;
+    }
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .nav-btn {
+    background-color: transparent;
+    border: none;
     color: white;
-    text-decoration: none;
-    margin-left: 20px;
+    cursor: pointer;
     font-size: 16px;
     display: flex;
     align-items: center;
-    background: #025FEB;
+    gap: 8px;
+    text-decoration: none;
+    font-weight: 500;
+
+    img {
+      width: 25px;
+      height: 25px;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
-  
-  nav a img {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-  }
-  
+}

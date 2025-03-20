@@ -1,35 +1,86 @@
+@import '/src/assets/variables';
+.schedule-container {
+  h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 24px;
+    color: #364d6f;
+    font-weight: bold;
+  }
+}
+
+
+
 table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: "Open Sans", sans-serif;
-  
-    th, td {
-      padding: 10px;
-      text-align: center;
-      border-bottom: 1px solid #E4EDF2;
-    }
-  
-    th {
-      background-color: #025FEB;
-      color: #FFFFFF;
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+
+  thead {
+    tr {
+      height: 40px;
     }
   }
-  
-  @media (max-width: 768px) {
-    table {
-      font-size: 14px;
-    }
-    th, td {
-      padding: 5px;
-    }
+
+  tr {
+    height: 70px;
   }
-  
-  @media (max-width: 500px) {
-    table {
-      font-size: 12px;
-    }
-    th, td {
-      padding: 3px;
-    }
+
+  .team-container {
+    padding: 0px 15px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
   }
-  
+
+  .lf {
+    justify-content: left;
+  }
+
+  .ri {
+    justify-content: right;
+  }
+
+}
+
+
+th {
+  background-color: #e3edf3;
+  color: $title;
+  font-size: 14px;
+}
+
+td {
+  font-size: 14px;
+}
+
+td img {
+  width: 53px;
+  height: 37px;
+  object-fit: cover;
+}
+
+tr:nth-child(even) {
+  background-color: $table-even-row;
+}
+
+.position-column {
+  width: 5%;
+}
+
+.team-column {
+  width: 60%;
+  padding: 0px 15px;
+}
+
+.mp-column,
+.gf-column,
+.ga-column,
+.gd-column,
+.points-column {
+  width: 10%;
+}
+
+.points-column {
+  font-weight: bold;
+}

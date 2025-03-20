@@ -1,26 +1,41 @@
-<table>
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Stadium</th>
-            <th>Home Team</th>
-            <th>Score</th>
-            <th>Away Team</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let match of matches">
-            <td>{{ match.matchDate | date:'dd.MM.yyyy HH:mm' }}</td>
-            <td>{{ match.stadium }}</td>
-            <td>                
-                <img [src]="'https://flagsapi.codeaid.io/' + match.homeTeam + '.png'" alt="{{ match.homeTeam }}">
-                {{ match.homeTeam }}
-            </td>
-            <td>{{ match.matchPlayed ? (match.homeTeamScore + ' : ' + match.awayTeamScore) : '-' }}</td>
-            <td>
-                <img [src]="'https://flagsapi.codeaid.io/' + match.awayTeam + '.png'" alt="{{ match.awayTeam }}">
-                {{ match.awayTeam }}
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="schedule-container">
+    <h2>League Schedule</h2>
+    <table>
+        <thead>
+            <tr>
+                <th align="right" class="date-column">Date/Time</th>
+                <th align="left" class="stadium-column">Stadium</th>
+                <th align="right" class="team-column">Home Team</th>
+                <th align="center" class="score-column"></th>
+                <th align="left" class="team-column">Away Team</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let match of matches">
+                <td align="right" class="date-column">{{ match.matchDate | date:'dd.MM.yyyy HH:mm' }}</td>
+
+                <td class="stadium-column">{{ match.stadium }}</td>
+
+                <td class="team-column">
+                    <div class="team-container right">
+                        <strong>{{ match.homeTeam }}</strong>
+                        <img [src]="'https://flagsapi.codeaid.io/' + match.homeTeam + '.png'"
+                            alt="{{ match.homeTeam }}">
+                    </div>
+                </td>
+
+                <td align="center" class="score-column">{{ match.matchPlayed ? (match.homeTeamScore + ' : ' +
+                    match.awayTeamScore) : '-' }}</td>
+
+                <td class="team-column">
+                    <div class="team-container left">
+                        <img [src]="'https://flagsapi.codeaid.io/' + match.awayTeam + '.png'"
+                            alt="{{ match.awayTeam }}">
+                        <strong>{{ match.awayTeam }}</strong>
+                    </div>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>

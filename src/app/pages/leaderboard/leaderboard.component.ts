@@ -14,8 +14,8 @@ export class LeaderboardComponent implements OnInit {
   constructor(private leagueService: LeagueService) { }
 
   ngOnInit(): void {
-    this.leagueService.fetchData().then(() => {
-      this.leaderboard = this.leagueService.getLeaderBoard();
+    this.leagueService.getMatches().subscribe((match) => {
+      this.leaderboard = this.leagueService.getLeaderBoard(match);
     });
   }
 }

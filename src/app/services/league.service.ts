@@ -12,13 +12,14 @@ import { Match } from '../models/match.model';
 import { LeaderboardEntry } from '../models/leaderboard.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable, switchMap, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class LeagueService {
-  private apiUrl = 'http://localhost:3001/api/v1';
+  private apiUrl = environment.apiUrl;
   private accessToken: string | null = null;
   matchesData: Match[] = [];
 
@@ -78,7 +79,7 @@ export class LeagueService {
    *
    * @returns {Array} List of matches.
    */
-  getAllMatches(): Observable<Match[]> {
+  getMatches(): Observable<Match[]> {
     if (!this.accessToken) {
       return this.getAccessToken().pipe(
         switchMap(() =>
@@ -108,10 +109,10 @@ export class LeagueService {
    *
    * @returns {Array} List of teams representing the leaderBoard.
    */
-  getLeaderBoard(): LeaderboardEntry[] {
+  getLeaderBoard(matchs: any): LeaderboardEntry[] {
     const standings: { [team: string]: LeaderboardEntry } = {};
 
-    this.matchesData.forEach(match => {
+    matchs.forEach(match => {
       const { homeTeam, awayTeam, homeTeamScore, awayTeamScore, matchPlayed } = match;
 
       if (!standings[homeTeam]) standings[homeTeam] = { teamName: homeTeam, matchesPlayed: 0, goalsFor: 0, goalsAgainst: 0, points: 0 };
@@ -151,9 +152,9 @@ export class LeagueService {
    */
   async fetchData() {
     try {
-      const response = await fetch('http://localhost:3001/api/matches');
-      const matches: Match[] = await response.json();
-      this.setMatches(matches);
+      await this.getMatches().subscribe(matches => {
+        this.setMatches(matches);
+      });
     } catch (error) {
       console.error('Error fetching matches:', error);
     }
